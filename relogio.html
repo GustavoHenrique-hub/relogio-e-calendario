@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width-device-width, initial-scale=1.0" name="viewport">
+    <title>Clock Watch</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            text-align: center;
+            font-family: "Roboto", sans-serif;
+
+        }
+
+
+        /* CSS of the clock */
+        .clock {
+            font-size: 28px;
+            border: solid 1px;
+            border-radius: 10px;
+            background-color: #121212;
+            padding: 2px 50px;
+            color: #fff;
+        }
+
+        /* .clock:hover {
+            transition: 0.6s;
+            background-color: #fff;
+            color: #121212;
+        } */
+
+
+        /* CSS of the button alterDay */
+        #alterDay {
+            font-size: 28px;
+            border: solid 1px;
+            border-radius: 10px;
+            background-color: #121212;
+            padding: 2px 50px;
+            color: #fff;
+        }
+
+        #alterDay:hover {
+            transition: 0.6s;
+            background-color: #fff;
+            color: #121212;
+        }
+    </style>
+</head>
+
+<body onload="clock()">
+
+    <!-- Title that will greet the user -->
+    <h1 id="greet">...</h1>
+
+    <!-- Shows what time it is -->
+    <label class="clock" ></label>
+
+    <!-- Show what day it is -->
+    <label id="alterDay" onclick="dayWeek()">Click to Day!</label>
+    <script>
+
+        //Serves to greet according to the time
+        var greet = document.getElementById('greet')
+        var date = new Date()
+        var hours = date.getHours()
+
+        if (hours < 12) {
+            greet.innerHTML = 'Good mornig!'
+        } else if (hours <= 18) {
+            greet.innerHTML = 'Good afternoon!'
+        } else {
+            greet.innerHTML = 'Good night!'
+        }
+
+
+
+        //It serves to show on the label what day it is  today
+        function dayWeek() {
+            var alterDay = document.getElementById('alterDay')
+            var date = new Date()
+            var dayWeek = date.getDay()
+
+            switch (dayWeek) {
+                case 0:
+                    alterDay.innerHTML = 'Sunday!'
+                    break
+                case 1:
+                    alterDay.innerHTML = 'Monday!'
+                    break
+                case 2:
+                    alterDay.innerHTML = 'Tuesday!'
+                    break
+                case 3:
+                    alterDay.innerHTML = 'Wednesday!'
+                    break
+                case 4:
+                    alterDay.innerHTML = 'Thursday!'
+                    break
+                case 5:
+                    alterDay.innerHTML = 'Friday!'
+                    break
+                case 6:
+                    alterDay.innerHTML = 'Saturday!'
+                    break
+            }
+        }
+        function clock() {
+
+            //Gets the hours, minutes and seconds
+            var date = new Date()
+            var hours = date.getHours()
+            var minutes = date.getMinutes()
+            var seconds = date.getSeconds()
+
+
+            //Serves to add the hours, minutes and seconds in the label
+            if (hours < 10) {
+                hours = '0' + hours
+            } else if (minutes < 10) {
+                minutes = '0' + minutes
+            } else if (seconds < 10) {
+                seconds = '0' + seconds
+            }
+            //Serves for aesthetics of the hour counter
+            document.querySelector('.clock').innerHTML = hours + ':' + minutes + ':' + seconds
+        }
+
+        //It serves to execute the clock() function every second
+        window.setInterval('clock()', 1000)
+    </script>
+</body>
+
+</html>
